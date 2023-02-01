@@ -26,6 +26,14 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+// Let's register our serviceworker
+navigator.serviceWorker.register('sw.js');
+        `,
+          }}
+        ></script>
       </body>
     </html>
   );
