@@ -1,7 +1,14 @@
 console.log("Service Worker Loaded...");
 self.addEventListener("fetch", async (e) => {
   console.log(e);
-  const res = await fetch("http://localhost:3000").catch((e) => e);
-  console.log(res);
+  return event.respondWith(
+    new Response(null, {
+      status: 301,
+      headers: {
+        // Construct a regular redirect response.
+        Location: `http://localhost:3000/exercise/1`,
+      },
+    })
+  );
   // e.respondWith(); //whatever you want
 });
