@@ -9,6 +9,8 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
+  console.log({ request });
+
   // We are only interested in navigation requests.
   if (request.mode === "navigate" && request.destination === "document") {
     const url = new URL(request.url);
