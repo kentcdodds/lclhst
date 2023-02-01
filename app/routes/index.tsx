@@ -4,7 +4,7 @@ import { useSearchParams } from "@remix-run/react";
 export const headers: HeadersFunction = () => {
   // csp that allows iframes from localhost at any port
   return {
-    "Content-Security-Policy": "frame-ancestors 'self' http://127.0.0.1:3000",
+    "Content-Security-Policy": "frame-src 'self' http://127.0.0.1:3000",
   };
 };
 
