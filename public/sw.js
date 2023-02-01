@@ -12,7 +12,10 @@ self.addEventListener("fetch", (event) => {
   console.log({ request });
 
   // We are only interested in navigation requests.
-  if (request.mode === "navigate" && request.destination === "iframe") {
+  if (
+    request.mode === "navigate" &&
+    (request.destination === "iframe" || request.destination === "document")
+  ) {
     const url = new URL(request.url);
 
     // Having a predicate is a good idea so we don't end up
