@@ -1,5 +1,5 @@
 import type { HeadersFunction } from "@remix-run/node";
-import { useSearchParams } from "@remix-run/react";
+import { Form, useSearchParams } from "@remix-run/react";
 
 export const headers: HeadersFunction = () => {
   return {
@@ -12,7 +12,15 @@ export default function Index() {
   const [searchParams] = useSearchParams();
   const url = searchParams.get("url");
   if (!url) {
-    return <p>No URL Provided</p>;
+    return (
+      <div>
+        <p>No URL Provided. Provide one?</p>
+        <Form method="get">
+          <input name="url" type="url" />
+          <button type="submit">Submit</button>
+        </Form>
+      </div>
+    );
   }
   return (
     <iframe
