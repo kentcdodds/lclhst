@@ -27,11 +27,14 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <script
+          type="module"
           dangerouslySetInnerHTML={{
             __html: /* javascript */ `
 if ('serviceWorker' in navigator) {
   async function init() {
-    await navigator.serviceWorker.register('/sw.js')
+    await navigator.serviceWorker.register('/sw.js', {
+      type: 'module'
+    })
     await navigator.serviceWorker.ready
     console.log('Service Worker is ready!')
   }
