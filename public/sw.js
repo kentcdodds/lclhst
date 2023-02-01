@@ -1,14 +1,31 @@
-console.log("Service Worker Loaded...");
-self.addEventListener("fetch", async (e) => {
-  console.log(e);
-  return event.respondWith(
-    new Response(null, {
-      status: 301,
-      headers: {
-        // Construct a regular redirect response.
-        Location: `http://localhost:3000/exercise/1`,
-      },
-    })
-  );
-  // e.respondWith(); //whatever you want
+self.addEventListener("install", function () {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", function (event) {
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+
+  // We are only interested in navigation requests.
+  if (request.mode === "navigate" && request.destination === "document") {
+    const url = new URL(request.url);
+
+    // Having a predicate is a good idea so we don't end up
+    // redirecting from everywhere on the site.
+    const destination = url.searchParams.get("url");
+    if (url.pathname === "/go") {
+      return event.respondWith(
+        new Response(null, {
+          status: 301,
+          headers: {
+            // Construct a regular redirect response.
+            Location: destination,
+          },
+        })
+      );
+    }
+  }
 });
