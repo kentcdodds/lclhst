@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import type { DataFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
-export default function Go() {
-  useEffect(() => {
-    // refresh the page
-    window.location.reload();
-  }, []);
-  return <p>You should not see this for long...</p>;
+export async function loader({ request }: DataFunctionArgs) {
+  const destination = new URL(request.url).searchParams.get("url");
+  if (!destination) return redirect("/");
+  return redirect(destination);
 }
