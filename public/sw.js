@@ -15,8 +15,8 @@ self.addEventListener("fetch", (event) => {
 
     // Having a predicate is a good idea so we don't end up
     // redirecting from everywhere on the site.
-    const destination = url.searchParams.get("url");
     if (url.pathname === "/go") {
+      const destination = url.searchParams.get("url");
       return event.respondWith(
         new Response(null, {
           status: 301,
