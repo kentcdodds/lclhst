@@ -9,13 +9,11 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
-  console.log({ request });
-
-  // We are only interested in navigation requests.
   if (
     request.mode === "navigate" &&
     (request.destination === "iframe" || request.destination === "document")
   ) {
+    console.log({ request });
     const url = new URL(request.url);
 
     // Having a predicate is a good idea so we don't end up
